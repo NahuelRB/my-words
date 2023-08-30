@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .content-section1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 20vh;
+    background-color: #1dc5fd;
+  }
+
+  .content-palabra{
+    display: flex;
+    align-items: center;
+    background-color: #a8bb2d;
+    flex-direction: column;
+  }
+
+  .content-aprobar{
+    display: flex;
+    background-color: #bb2daf;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 30%;    
+  }
+
+  .botones{
+    width: 20%;
+    height: 60%;
+  }
