@@ -31,33 +31,24 @@ export default function Section1() {
     };
 
     const [indicePalabra, setIndicePalabra] = useState(0);
-    const [mostrarBotonPresionar, setMostrarBotonPresionar] = useState(true);
+    const [mostrarBotonPresionar, setMostrarBotonPresionar] = useState(false);
     //let indicePalabraTemp = indicePalabra;
     let currentIndex = indicePalabra;
     const handleButtonClick = () => {
-
-
-        //listaPalabras.forEach((dato) => {
-        /*if (inputValue === listaPalabras.palEspañol) {
-            console.log("funciono");
-            console.log(dato.id - 1);
-        }*/
         for (let i = 0; i < listaPalabras.length; i++) {
             if (inputValue === listaPalabras[i].palEspañol) {
                 console.log("funciono");
             }
         }
-        // });
-
         console.log(currentIndex);
         console.log(indicePalabra);
         if (currentIndex < listaPalabras.length) {
             setIndicePalabra(currentIndex + 1);
-        } else if (currentIndex === listaPalabras.length1) {
+        } else if (currentIndex === listaPalabras.length) {
             console.log("se acabo la lista");
             setInputValue("");
             console.log(listaPalabras.length);
-            setMostrarBotonPresionar(false);
+            setMostrarBotonPresionar(true);
         }
         setInputValue("");
     };
@@ -65,9 +56,6 @@ export default function Section1() {
     const botonResultados = (
         <button> Boton resultados</button>
     );
-
-
-    let temporaryInput = ''; // Variable para almacenar temporalmente el valor del campo
 
     const p = listaPalabras.map((data) =>
         <li key={data.id}>
@@ -77,16 +65,13 @@ export default function Section1() {
     );
 
     return (
-
         <div className="content-section1">
             <div className="content-palabra">
                 <ul>
                     {p}
                 </ul>
-                <br /><br />
 
                 <br /><br />
-
 
                 <label> palabra en inglés: {indicePalabra < listaPalabras.length ? listaPalabras[indicePalabra].palIngles : 'Fin de la lista'} </label>
                 <input
@@ -95,32 +80,33 @@ export default function Section1() {
                     value={inputValue}
                     onChange={handleInputChange}
                 />
-                <Button onPresionar={handleButtonClick} sacarBoton={setMostrarBotonPresionar} />
-                <Button mostrarBotonResultados={indicePalabra === listaPalabras.length} />
+                <Button onPresionar={handleButtonClick} />
+                <ResultadosButton mostrarBotonResultados={mostrarBotonPresionar} />
             </div>
         </div>
     );
 }
-
-function Button({ onPresionar, mostrarBotonResultados, sacarBoton }) {
-
+function Button({ onPresionar, mostrarBotonResultados }) {
     const cargarPalabra = () => {
         const nuevoDato = "Palabra";
         //setInputWord(nuevoDato);
         onPresionar(nuevoDato);
     }
-
     return (
         <>
-            {sacarBoton ? null : (
-                <Button sacarBoton={sacarBoton} />
-            )}
-        
-
-            {mostrarBotonResultados && (
-                <button>Resultados</button>
-            )}
+            <button onClick={onPresionar}> Cargar </button>
         </>
     );
 }
+
+function ResultadosButton({ mostrarBotonResultados }) {
+    return (
+        <>
+            {mostrarBotonResultados ? (
+                <button>Resultados</button>
+            ) : null}
+        </>
+    );
+}
+
 
