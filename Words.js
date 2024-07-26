@@ -1,6 +1,8 @@
 
 let words = [];
 
+//lalalalalal
+
 function verifyWord() {
     let word = document.getElementById("word");
     let palabra = document.getElementById("palabra").value;
