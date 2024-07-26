@@ -9,15 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let palabra = document.getElementById("palabra");
     let resultado = document.getElementById("resultado");
 
+    let espaniol = document.getElementById("español");
+    let ingles = document.getElementById("ingles")
+
     function prueba(){
         console.log(palabra.value);
         console.log(numberRandom);
         console.log(englishWords[numberRandom]);
 
+        espaniol.textContent = `Palabra en español: ${palabra.value}`
+        ingles.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
+
         if(englishWords[numberRandom] == palabra.value){
             console.log("Funciono la traducción");
+            resultado.innerHTML =  `<h3> Es correcto </h3>`
         }else{
             console.log("Fallaste");
+            resultado.innerHTML =  `<h3> Fallaste </h3>`
         }
     }
 
