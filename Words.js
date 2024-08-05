@@ -1,7 +1,7 @@
 
 let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
 let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
-//lalalalalal
+
 let intervalId;
 let numberRandom;
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,20 +16,32 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //Buttons
     let enter = document.getElementById("enviar");
+    
+    let prueba2 = document.getElementById("prueba");
 
- 
+    //Eventos
     palabra.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
             enter.click(); // Simula un clic en el botón
         }
     });
+    enter.addEventListener('click', prueba);
+    prueba2.addEventListener('click', listado);
 
+    let listadoPrueba = []
+    contador = 0
+    function listado(){
+        let listadoPrueba2= "Prueba" + (contador ++)
+
+        listadoPrueba.push(listadoPrueba2);
+
+        console.log(listadoPrueba);
+    }
 
     function prueba() {
         //console.log(palabra.value);
-        //console.log(numberRandom);
-        //console.log(englishWords[numberRandom]);
+
         spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
         english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
         console.log("Prueba 1:" + palabra.value.toLowerCase());
@@ -40,19 +52,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (englishWords[numberRandom] == palabra.value.toLowerCase()) {
             console.log("Funciono la traducción");
             resultado.innerHTML = `<h3> Es correcto </h3>`
+            //clearInterval(intervalId); // Limpia el intervalo existente
+            intervalId = null; 
+            startUpdatingWords();
+            randomWords();
+            palabra.value=""
         } else {
             console.log("Fallaste");
+            palabra.value=""
             resultado.innerHTML = `<h3> Fallaste </h3>`
         }
     }
-
 
     function randomWords() {
         //words = loadNewWords()    
         numberRandom = Math.floor(Math.random() * spanishWords.length);
         word.textContent = spanishWords[numberRandom];
     }
-
 
     function verifyWord() {
         //localStorage.removeItem("local_words");
@@ -74,15 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startUpdatingWords() {
-        if (intervalId) return; // Evita iniciar múltiples intervalos
+        if (intervalId) return;
+        setTimeout(() => {
+            clearInterval(intervalId);
+        }, 1000);
 
         intervalId = setInterval(() => {
             randomWords();
         }, 100);
-
-        setTimeout(() => {
-            clearInterval(intervalId);
-        }, 1000);
     }
 
     function saveWords(words) {
@@ -115,12 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return localWords;
     }
 
-    /*function randomWords(word){
-        let numberRandom = Math.floor(Math.random()* words.length);
-        word.textContent = words[numberRandom]; 
-        }*/
-
-
     let listWords = loadWords();
     console.log("Palabras iniciales: " + listWords);
 
@@ -128,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //listWords = loadNewWords("Dato2");
 
     console.log("Palabras finales: " + listWords);
+    randomWords()
     startUpdatingWords()
 
-    enviar.addEventListener('click', prueba);
 })
