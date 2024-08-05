@@ -21,6 +21,8 @@ function cargarMostrar() {
         spanishWords.push(word.value);
 
     let ul = document.createElement('ul');
+    ul.style.listStyleType = 'none';
+
     let div = document.createElement('div');
     let botonX = document.createElement('button')
 
@@ -28,32 +30,68 @@ function cargarMostrar() {
         let li = document.createElement('li');
         li.textContent = word;
 
+
         let botonX = document.createElement('button')
-        botonX.textContent = "Eliminar";
+        botonX.textContent = "X";
         botonX.id = `btn-${index}`
 
         ul.appendChild(li);
         li.appendChild(botonX);
 
         botonX.addEventListener('click', function () {
-            spanishWords.splice(index,1);
+            spanishWords.splice(index, 1);
             console.log(index);
             cargarMostrar()
         });
 
+        li.className = 'list-group-item';
+        botonX.className = 'btn btn-danger btn-sm';
     });
-
 
     listado.innerHTML = ''
     listado.appendChild(ul);
 
     console.log(listado)
     word.value = ""
+    loadNewWords("Pruebas");
 }
+
+function showList(){
+    
+}
+
+function saveWords(words) {
+    let jsonWords = JSON.stringify(words);
+    localStorage.setItem("local_words", jsonWords);
+}
+
+function loadWords() {
+    let localWords = localStorage.getItem("local_words")
+    try {
+        if (localWords)
+            return JSON.parse(localWords);
+        else
+            return [];
+    } catch (error) {
+        console.error("Error al parsear el JSON: " + error);
+        return [];
+    }
+}
+
+function loadNewWords(word) {
+    let localWords = loadWords();
+
+    spanishWords.push(word);
+    console.log(spanishWords)
+    saveWords(localWords);
+    return localWords;
+}
+
+
 
 
 cargarMostrar()
 
 document.addEventListener('DOMContentLoaded', () => {
-
+    
 })
