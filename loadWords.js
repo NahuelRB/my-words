@@ -17,96 +17,69 @@ word.addEventListener('keypress', function (event) {
 
 //Cargando palabras a la lista
 function loadWords() {
+    let prueba = JSON.parse(localStorage.getItem('list_of_words')) || []
+    /* if (!Array.isArray(prueba)) {
+         prueba = [];
+     }*/
+
     console.log("Cargando palabras");
     word.focus()
-    
 
-    if (word.value != ""){
-        spanishWords.push(word.value)
-        saveWords(spanishWords);
-        word.value=""
+    prueba.push(word.value)
+    if (word.value != "") {
+        saveWords(prueba);
+        word.value = ""
     }
-    console.log(localWords);
     showList()
 }
-/*function loadWords() {
-    let localWords = localStorage.getItem("local_words")
-    try {
-        if (localWords)
-            return JSON.parse(localWords);
-        else
-            return [];
-    } catch (error) {
-        console.error("Error al parsear el JSON: " + error);
-        return [];
-    }
-}*/
 
-function saveWords(word){
-    console.log("Grabando palabra en LocalStorage")
-    let jsonWords = JSON.stringify(word)
-    localStorage.setItem("local_words",jsonWords)
+//Guardar la lista en LocalStorage
+function saveWords(word) {
+    console.log("Guardando palabra en LocalStorage")
+    localStorage.setItem('list_of_words', JSON.stringify(word));
 }
 
-/*function saveWords(words) {
-    let jsonWords = JSON.stringify(words);
-    localStorage.setItem("local_words", jsonWords);
-}*/
-
-/*function loadNewWords(word) {
-    let localWords = loadWords();
-
-    spanishWords.push(word);
-    console.log(spanishWords)
-    saveWords(localWords);
-    return localWords;
-}*/
-
 //Mostrando lista armada
+function showList() {
 
-function showList(){
-    let localWords = localStorage.getItem("local_words")
-    spanishWords = JSON.parse(localWords)
+    let localWords = JSON.parse(localStorage.getItem('list_of_words')) || []
+
+    /*if (!Array.isArray(localWords)) {
+        localWords = [];
+    }*/
+    listado.innerHTML = '';
     console.log("Mostrando lista")
     console.log(localWords)
-    console.log(spanishWords)
 
     let ul = document.createElement('ul');
-    ul.style.listStyleType = 'none';   
+    ul.style.listStyleType = 'none';
 
-    let div = document.createElement('div');
-    let botonX = document.createElement('button')
+    //let div = document.createElement('div');
+    //let botonX = document.createElement('button')
 
-    spanishWords.slice(0).forEach((word, index) => {
+    localWords.slice(0).forEach((word, index) => {
         let li = document.createElement('li');
         li.textContent = word;
 
         let botonX = document.createElement('button')
         botonX.textContent = "X";
         botonX.id = `btn-${index}`
-
-        ul.appendChild(li);
-        li.appendChild(botonX);
+        botonX.className = 'btn btn-danger btn-sm';
 
         botonX.addEventListener('click', function () {
-            spanishWords.splice(index, 1);
-            console.log(index);
+            localWords.splice(index, 1);
+            localStorage.setItem('list_of_words', JSON.stringify(localWords));
             showList()
         });
 
         li.className = 'list-group-item';
-        botonX.className = 'btn btn-danger btn-sm';
-        listado.innerHTML = ''
-        listado.appendChild(ul);
-    
-        console.log(listado)
-        word.value = ""
+
+
+        ul.appendChild(li);
+        li.appendChild(botonX);
     });
-
+    listado.appendChild(ul);
 }
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     showList()
 })
