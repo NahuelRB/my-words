@@ -4,29 +4,61 @@
     box-sizing: border-box;
 }
 
-.list_of_words{
-   
-
+header h1{
+    margin: 1.5rem;
+}
+.container {
+    display: flex;
+    flex-direction: column;
 }
 
-.lista{
+.lista {
+    width: 400px;
     background: rgb(182, 182, 182);
     display: flex;
-    flex-direction: unset;
+    /* flex-direction: row; */
     justify-content: space-evenly;
 }
 
-.span{
-    width: 32%;
-    padding: 2%;
-    background: yellow;
-    margin: 1%;
-}
 
-.span2{
-    justify-content: center;
-}
-
-.container{
+.container {
     align-items: center;
+}
+
+.prueba {
+    margin: 3px;
+}
+
+.container ul li label {
+    color: white;
+    text-align: center;
+}
+
+.container ul li button {
+    width: 80px;
+}
+
+.container ul li .span {
+    background: black;
+    margin: 1%;
+    padding: 1%;
+    text-align: center;
+    width: 19rem;
+}
+
+.container ul li .span2 {
+    display: flex;
+}
+
+.container input { 
+    background-color: black;
+    border: darkgoldenrod;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+.container .cargar{
+    width: 7rem;
+    margin: 1rem;
 }

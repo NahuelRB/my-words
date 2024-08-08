@@ -4,7 +4,7 @@ let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
 
 let listado = document.querySelector(".list_of_words");
 let word = document.getElementById("word");
-let cargar = document.getElementById("cargar");
+let cargar = document.querySelector(".cargar");
 
 cargar.addEventListener("click", loadWords)
 
@@ -71,10 +71,10 @@ function showList() {
         let botonX = document.createElement('button')
 
    
-        span.textContent = word
+        label.textContent = word
         botonX.textContent = "X";
         botonX.id = `btn-${index}`
-        botonX.className = 'btn btn-danger btn-sm';
+        botonX.className = 'btn btn-danger btn-sm prueba';
 
         botonX.addEventListener('click', function () {
             localWords.splice(index, 1);
@@ -85,9 +85,12 @@ function showList() {
         //li.className = 'list-group-item';
 
      
-        span2.appendChild(botonX)
+        span.appendChild(label);
+        span2.appendChild(botonX);
         li.appendChild(span)
         li.appendChild(span2)
+        //li.appendChild(span)
+        //li.appendChild(span2)
         ul.appendChild(li);
         //li.appendChild(botonX);
     });
