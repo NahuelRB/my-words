@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.list_of_words{
+   
+
+}
+
+.lista{
+    background: rgb(182, 182, 182);
+    display: flex;
+    flex-direction: unset;
+    justify-content: space-evenly;
+}
+
+.span{
+    width: 32%;
+    padding: 2%;
+    background: yellow;
+    margin: 1%;
+}
+
+.span2{
+    justify-content: center;
+}
+
+.container{
+    align-items: center;
+}

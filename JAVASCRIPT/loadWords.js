@@ -2,7 +2,7 @@ let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
 let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
 
 
-let listado = document.getElementById("list");
+let listado = document.querySelector(".list_of_words");
 let word = document.getElementById("word");
 let cargar = document.getElementById("cargar");
 
@@ -24,9 +24,9 @@ function loadWords() {
 
     console.log("Cargando palabras");
     word.focus()
-
-    prueba.push(word.value)
-    if (word.value != "") {
+    
+    if (word.value.trim() != "") {
+        prueba.push(word.value.trim());
         saveWords(prueba);
         word.value = ""
     }
@@ -59,9 +59,19 @@ function showList() {
 
     localWords.slice(0).forEach((word, index) => {
         let li = document.createElement('li');
-        li.textContent = word;
+        li.className='lista'
 
+        let span = document.createElement('span')
+        let span2 = document.createElement('span')
+
+        span.className='span'
+        span2.className='span2'
+
+        let label = document.createElement('label')
         let botonX = document.createElement('button')
+
+   
+        span.textContent = word
         botonX.textContent = "X";
         botonX.id = `btn-${index}`
         botonX.className = 'btn btn-danger btn-sm';
@@ -72,11 +82,14 @@ function showList() {
             showList()
         });
 
-        li.className = 'list-group-item';
+        //li.className = 'list-group-item';
 
-
+     
+        span2.appendChild(botonX)
+        li.appendChild(span)
+        li.appendChild(span2)
         ul.appendChild(li);
-        li.appendChild(botonX);
+        //li.appendChild(botonX);
     });
     listado.appendChild(ul);
 }
