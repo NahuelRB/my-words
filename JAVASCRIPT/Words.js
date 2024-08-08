@@ -16,10 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //Buttons
     let enter = document.getElementById("enviar");
+    let pagList = document.querySelector('.pagListaPalabras');
     
     let prueba2 = document.getElementById("prueba");
 
     //Eventos
+    pagList.addEventListener('click', function(event){
+        window.location.href = 'lista_palabras.html'
+    });
+
     palabra.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
