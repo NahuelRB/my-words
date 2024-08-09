@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Eventos
     pagList.addEventListener('click', function(event){
-        window.location.href = '/my-words/HTML/lista_palabras.html'
+        window.location.href = '/MY-WORDS/HTML/lista_palabras.html'
     });
 
     palabra.addEventListener('keypress', function(event) {
