@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My words</title>
+    <link rel="stylesheet" href="CSS/words.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
 <body>
     <header>
-        <h1>My words</h1>
+        <div>
+            <h2>Welcome to the app "My words"</h2>
+        </div>
     </header>
 
-    <div>
-        <h2>Welcome to the app "My words"</h2>
+    <div class="container">
+        <div id="word">
+        </div>
+        <br>
+        <div>
+            <input type="text" id="palabra" placeholder="Ingrese su palabra en español" />
+        </div>
+        <br>
+        <div>
+            <button id="enviar">Enviar</button>
+            <button>Cancelar</button>
+            <button id="prueba"> prueba</button>
+            <button class="pagListaPalabras" class="btn btn-primary">Lista de palabras</button>
+        </div>
+        <div id="resultado">
+
+        </div>
+        <div>
+            <p id="español"></p>
+            <p id="ingles"></p>
+        </div>
     </div>
 
-    <div id="word">
-        
-    </div>
-    <br>
-    <div>
-        <input type="text" id="palabra" placeholder="Ingrese su palabra en español"/>
-    </div>
-    <br>
-    <div>
-        <button id="enviar"> Enviar </button>
-        <button> Cancelar</button>
-        <button id="prueba"> prueba</button>
-        <button class="pagListaPalabras" class="btn btn-primary">Lista de palabras</button>
-    </div>
-    <div id="resultado">
-        
-    </div>
-    <div>
-        <p id="español"></p>
-        <p id="ingles"></p> 
-    </div>
 </body>
 <script src="JAVASCRIPT/Words.js"></script>
+
 </html>
