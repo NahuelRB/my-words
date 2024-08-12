@@ -22,14 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Eventos
     pagList.addEventListener('click', function(event){
-<<<<<<< HEAD
         window.location.href = 'lista_palabras.html'
     }); 
-=======
-        window.location.href = '../HTML/lista_palabras.html'
-    });
->>>>>>> parent of 943fe52 (Probado otro directorio)
-
     palabra.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
