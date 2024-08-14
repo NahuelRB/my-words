@@ -3,7 +3,7 @@ let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
 
 
 let listado = document.querySelector(".list_of_words");
-let word = document.getElementById("word");
+let word = document.querySelector(".word");
 let cargar = document.querySelector(".cargar");
 
 cargar.addEventListener("click", loadWords)

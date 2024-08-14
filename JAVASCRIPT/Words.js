@@ -6,19 +6,19 @@ let intervalId;
 let numberRandom;
 document.addEventListener('DOMContentLoaded', () => {
     //Input
-    let palabra = document.getElementById("palabra");
+    let palabra = document.querySelector(".palabra");
     
     //DIV
-    let word = document.getElementById("word");
-    let resultado = document.getElementById("resultado");
-    let spanish = document.getElementById("español");
-    let english = document.getElementById("ingles")
+    let word = document.querySelector(".word");
+    let resultado = document.querySelector(".resultado");
+    let spanish = document.querySelector(".español");
+    let english = document.querySelector(".ingles")
     
     //Buttons
-    let enter = document.getElementById("enviar");
+    let enter = document.querySelector(".enviar");
     let pagList = document.querySelector('.pagListaPalabras');
     
-    let prueba2 = document.getElementById("prueba");
+    let prueba2 = document.querySelector(".prueba");
 
     //Eventos
     pagList.addEventListener('click', function(event){
