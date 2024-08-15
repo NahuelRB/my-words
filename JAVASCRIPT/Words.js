@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     enter.addEventListener('click', prueba);
-    prueba2.addEventListener('click', listado);
 
     let listadoPrueba = []
     contador = 0
