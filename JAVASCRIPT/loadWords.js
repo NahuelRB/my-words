@@ -11,7 +11,7 @@ let home = document.querySelector(".home");
 cargar.addEventListener('click', loadWords)
 
 home.addEventListener('click', function(event){
-    window.location.href = '../index.html'
+    window.history.back();
 }); 
 word.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
