@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-header {
+header{
     display: flex;
     justify-content: space-between; 
     align-items: center; 
@@ -15,13 +15,8 @@ header h1 {
     text-align: center; 
     margin: 1.5rem;
 }
-header button{
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: white;
-        cursor: pointer
+header a img{
+        width: 4rem;
 }
 
 .container {

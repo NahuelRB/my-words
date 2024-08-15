@@ -5,9 +5,14 @@ let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
 let listado = document.querySelector(".list_of_words");
 let word = document.querySelector(".word");
 let cargar = document.querySelector(".cargar");
+let home = document.querySelector(".home");
 
-cargar.addEventListener("click", loadWords)
+//EVENTOS
+cargar.addEventListener('click', loadWords)
 
+home.addEventListener('click', function(event){
+    window.location.href = '../index.html'
+}); 
 word.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
