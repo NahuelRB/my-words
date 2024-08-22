@@ -3,7 +3,8 @@ let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
 
 
 let listado = document.querySelector(".list_of_words");
-let word = document.querySelector(".word");
+let wordSpanish = document.querySelector(".wordSpanish");
+let word = document.querySelector(".wordSpanish");
 let cargar = document.querySelector(".cargar");
 let home = document.querySelector(".home");
 
@@ -13,7 +14,7 @@ cargar.addEventListener('click', loadWords)
 home.addEventListener('click', function(event){
     window.history.back();
 }); 
-word.addEventListener('keypress', function (event) {
+wordSpanish.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
         cargar.click(); // Simula un clic en el botón
@@ -28,12 +29,12 @@ function loadWords() {
      }*/
 
     console.log("Cargando palabras");
-    word.focus()
+    wordSpanish.focus()
     
-    if (word.value.trim() != "") {
-        prueba.push(word.value.trim());
+    if (wordSpanish.value.trim() != "") {
+        prueba.push(wordSpanish.value.trim());
         saveWords(prueba);
-        word.value = ""
+        wordSpanish.value = ""
     }
     showList()
 }
