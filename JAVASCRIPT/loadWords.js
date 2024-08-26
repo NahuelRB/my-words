@@ -1,18 +1,13 @@
-let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
-let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
-
-
 let listado = document.querySelector(".list_of_words");
 
 let inputWordSpanish = document.querySelector(".wordSpanish");
 let inputWordEnglish = document.querySelector(".wordEnglish");
 
-//let word = document.querySelector(".wordSpanish");
 let buttonCargar = document.querySelector(".cargar");
 let buttonHome = document.querySelector(".home");
 
 //EVENTOS
-buttonCargar.addEventListener('click', loadWords)
+buttonCargar.addEventListener('click', loadWords);
 
 buttonHome.addEventListener('click', function (event) {
     window.history.back();
@@ -24,6 +19,7 @@ inputWordSpanish.addEventListener('keypress', function (event) {
         buttonCargar.click(); // Simula un clic en el botón
     }
 });
+
 inputWordEnglish.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter

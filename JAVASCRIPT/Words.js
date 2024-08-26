@@ -1,42 +1,47 @@
 
-let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
-let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
+//let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
+let englishWords
+let spanishWords
 
 let intervalId;
 let numberRandom;
 document.addEventListener('DOMContentLoaded', () => {
-    //Input
-    let palabra = document.querySelector(".palabra");
-    
+    //INPUT
+    let inputRepuesta = document.querySelector(".palabra");
+
     //DIV
     let word = document.querySelector(".word");
     let resultado = document.querySelector(".resultado");
     let spanish = document.querySelector(".español");
     let english = document.querySelector(".ingles")
-    
-    //Buttons
+
+    //BUTTONS
     let enter = document.querySelector(".enviar");
     let pagList = document.querySelector('.pagListaPalabras');
     let buttonOtraPalabra = document.querySelector('.otraPalabra')
 
     let prueba2 = document.querySelector(".prueba");
 
-    //Eventos
-    pagList.addEventListener('click', function(event){
+    //EVENTOS
+    pagList.addEventListener('click', function (event) {
         window.location.href = 'lista_palabras.html'
-    }); 
-    palabra.addEventListener('keypress', function(event) {
+    });
+    inputRepuesta.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
             enter.click(); // Simula un clic en el botón
         }
     });
+    buttonOtraPalabra.addEventListener('click', function (event) {
+        randomWords();
+        startUpdatingWords();
+    });
     enter.addEventListener('click', prueba);
 
     let listadoPrueba = []
     contador = 0
-    function listado(){
-        let listadoPrueba2= "Prueba" + (contador ++)
+    function listado() {
+        let listadoPrueba2 = "Prueba " + (contador++)
 
         listadoPrueba.push(listadoPrueba2);
 
@@ -44,59 +49,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function prueba() {
-        //console.log(palabra.value);
-
         spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
         english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
-        console.log("Prueba 1:" + palabra.value.toLowerCase());
+        console.log("Prueba 1:" + inputRepuesta.value.toLowerCase());
 
         // let palabraMinuscula = palabra.value.toLowerCase();
 
 
-        if (englishWords[numberRandom] == palabra.value.toLowerCase()) {
+        if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
             console.log("Funciono la traducción");
             resultado.innerHTML = `<h3> Es correcto </h3>`
             //clearInterval(intervalId); // Limpia el intervalo existente
-            intervalId = null; 
+            intervalId = null;
             startUpdatingWords();
             randomWords();
-            palabra.value=""
+            inputRepuesta.value = ""
         } else {
             console.log("Fallaste");
-            palabra.value=""
+            inputRepuesta.value = ""
             resultado.innerHTML = `<h3> Fallaste </h3>`
         }
     }
 
     function randomWords() {
-        //words = loadNewWords()    
+        spanishWords = loadNewWords()
         numberRandom = Math.floor(Math.random() * spanishWords.length);
         word.textContent = spanishWords[numberRandom];
     }
 
-    function verifyWord() {
-        //localStorage.removeItem("local_words");
-
-        /*if (palabra == "tren") {
-            console.log("funciono");
-            resultado += "<h3> Ganaste</h3>"
-            } else {
-                resultado += "<h3> Perdiste </h3>"
-        }
-        document.body.insertAdjacentHTML('beforeend', resultado)*/
-
-        /*words = loadNewWords(palabra);
-        let p = randomWords(words);
-        console.log("Prueba: " + p);
-        
-        let s = `<p>${p}</p>`;
-        word.innerHTML = s*/
-    }
-
     function startUpdatingWords() {
-        if (intervalId) return;
+        if (intervalId !== null) return;
+
         setTimeout(() => {
             clearInterval(intervalId);
+            intervalId = null;
         }, 1000);
 
         intervalId = setInterval(() => {
@@ -110,12 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadWords() {
-        let localWords = localStorage.getItem("local_words")
         try {
-            if (localWords)
-                return JSON.parse(localWords);
-            else
+            spanishWords = JSON.parse(localStorage.getItem('list_words_spanish'));
+            if (spanishWords) {
+                return spanishWords;
+            } else {
                 return [];
+            }
         } catch (error) {
             console.error("Error al parsear el JSON: " + error);
             return [];
@@ -125,23 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadNewWords(word) {
         let localWords = loadWords();
 
-        /*if (!Array.isArray(localWords)) {
-            localWords = [];
-            }*/
-
-        localWords.push(word);
-        saveWords(localWords);
         return localWords;
     }
 
     let listWords = loadWords();
     console.log("Palabras iniciales: " + listWords);
 
-    //listWords = loadNewWord       s("Dato1");
-    //listWords = loadNewWords("Dato2");
-
     console.log("Palabras finales: " + listWords);
     randomWords()
     startUpdatingWords()
-
 })
