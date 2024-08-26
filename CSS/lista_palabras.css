@@ -40,6 +40,11 @@ header a img{
     margin: 3px;
 }
 
+.container input{
+    margin: 0.4rem;
+    width: 18rem;
+}
+
 .container ul li label {
     color: white;
     text-align: center;

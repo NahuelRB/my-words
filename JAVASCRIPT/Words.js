@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //Buttons
     let enter = document.querySelector(".enviar");
     let pagList = document.querySelector('.pagListaPalabras');
-    
+    let buttonOtraPalabra = document.querySelector('.otraPalabra')
+
     let prueba2 = document.querySelector(".prueba");
 
     //Eventos
