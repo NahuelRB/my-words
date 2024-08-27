@@ -1,17 +1,21 @@
 
 //let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
-let englishWords
-let spanishWords
 
-let intervalId;
-let numberRandom;
+document.addEventListener('DOMContentLoaded', () => {    
+    //VARIABLES
+    let englishWords;
+    let spanishWords;   
+    let intervalId;
+    let numberRandom;
+    let regresiva = 3;
+    let countdownInterval;
 
-let labelRegresiva = document.querySelector(".regresiva")
-document.addEventListener('DOMContentLoaded', () => {
     //INPUT
     let inputRepuesta = document.querySelector(".palabra");
-
-
+    
+    //LABEL
+    let labelRegresiva = document.querySelector(".regresiva")
+    
     //DIV
     let word = document.querySelector(".word");
     let resultado = document.querySelector(".resultado");
@@ -23,65 +27,61 @@ document.addEventListener('DOMContentLoaded', () => {
     let buttonPagList = document.querySelector('.pagListaPalabras');
     let buttonOtraPalabra = document.querySelector('.otraPalabra')
 
-    let prueba2 = document.querySelector(".prueba");
-
     
-    let listadoPrueba = []
+    /*let listadoPrueba = []
+    let prueba2 = document.querySelector(".prueba");
     contador = 0
     function listado() {
         let listadoPrueba2 = "Prueba " + (contador++)
-        
         listadoPrueba.push(listadoPrueba2);
-
         console.log(listadoPrueba);
-    }
-    
-    
-    
-    function prueba() {
+    }*/
+
+    function verificarRespuesta() {
         spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
         english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
         console.log("Prueba 1:" + inputRepuesta.value.toLowerCase());
-        
+        console.log("Verificar respuesta");
+
         if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
-            console.log("Funciono la traducción");
             resultado.innerHTML = `<h3> Es correcto </h3>`
-            //intervalId = null;
             startUpdatingWords();
             randomWords();
             inputRepuesta.value = ""
+            console.log("Es correcto");
         } else {
             iniciarCuentaRegresiva()
             console.log("Fallaste");
             inputRepuesta.value = ""
             resultado.innerHTML = `<h3> Fallaste </h3>`
+            console.log("Es incorrecto");
         }
     }
-    
+
     function randomWords() {
         spanishWords = loadNewWords()
         numberRandom = Math.floor(Math.random() * spanishWords.length);
         word.textContent = spanishWords[numberRandom];
     }
-    
+
     function startUpdatingWords() {
         if (intervalId !== null) return;
-        
+
         setTimeout(() => {
             clearInterval(intervalId);
             intervalId = null;
         }, 1000);
-        
+
         intervalId = setInterval(() => {
             randomWords();
         }, 100);
     }
-    
+
     function saveWords(words) {
         let jsonWords = JSON.stringify(words);
         localStorage.setItem("local_words", jsonWords);
     }
-    
+
     function loadWords() {
         try {
             spanishWords = JSON.parse(localStorage.getItem('list_words_spanish'));
@@ -96,43 +96,40 @@ document.addEventListener('DOMContentLoaded', () => {
             return [];
         }
     }
-    
+
     function loadNewWords(word) {
         let localWords = loadWords();
-        
+
         return localWords;
     }
-    
-    
+
+
     let listWords = loadWords();
     console.log("Palabras iniciales: " + listWords);
-    
+
     console.log("Palabras finales: " + listWords);
     randomWords()
     startUpdatingWords()
 
-    let regresiva = 3;
-let countdownInterval;
-
-function cuentaRegresiva() {
-    if (regresiva <= 0) {
-        clearInterval(countdownInterval);
-        location.reload();
-    } else {
-        console.log("entro");
-        labelRegresiva.hidden = false;
-        labelRegresiva.textContent = regresiva;
-        regresiva--;
+    function cuentaRegresiva() {
+        if (regresiva <= 0) {
+            clearInterval(countdownInterval);
+            location.reload();
+        } else {
+            console.log("entro");
+            labelRegresiva.hidden = false;
+            labelRegresiva.textContent = regresiva;
+            regresiva--;
+        }
     }
-}
 
-function iniciarCuentaRegresiva() {
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
+    function iniciarCuentaRegresiva() {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        regresiva = 3;
+        countdownInterval = setInterval(cuentaRegresiva, 1000);
     }
-    regresiva = 3;
-    countdownInterval = setInterval(cuentaRegresiva, 1000);
-}
 
 
     //EVENTOS
@@ -149,6 +146,6 @@ function iniciarCuentaRegresiva() {
         randomWords();
         startUpdatingWords();
     });
-    buttonEnviar.addEventListener('click', prueba);
+    buttonEnviar.addEventListener('click', verificarRespuesta);
 })
 
