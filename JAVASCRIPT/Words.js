@@ -1,18 +1,14 @@
-
-//let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
-
 document.addEventListener('DOMContentLoaded', () => {    
     //VARIABLES
     let englishWords;
     let spanishWords;   
-    let intervalId;
     let numberRandom;
     let regresiva = 3;
     let countdownInterval;
 
     //INPUT
     let inputRepuesta = document.querySelector(".palabra");
-    
+    inputRepuesta.focus();
     //LABEL
     let labelRegresiva = document.querySelector(".regresiva")
     
@@ -28,15 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let buttonOtraPalabra = document.querySelector('.otraPalabra')
 
     
-    /*let listadoPrueba = []
-    let prueba2 = document.querySelector(".prueba");
-    contador = 0
-    function listado() {
-        let listadoPrueba2 = "Prueba " + (contador++)
-        listadoPrueba.push(listadoPrueba2);
-        console.log(listadoPrueba);
-    }*/
-
     function verificarRespuesta() {
         spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
         english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
@@ -44,17 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Verificar respuesta");
 
         if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
-            resultado.innerHTML = `<h3> Es correcto </h3>`
+            resultado.innerHTML = `<h3> Correcto </h3>`
             startUpdatingWords();
             randomWords();
             inputRepuesta.value = ""
-            console.log("Es correcto");
+            console.log("Correcto");
         } else {
             iniciarCuentaRegresiva()
-            console.log("Fallaste");
             inputRepuesta.value = ""
-            resultado.innerHTML = `<h3> Fallaste </h3>`
-            console.log("Es incorrecto");
+            resultado.innerHTML = `<h3> Incorrecto </h3>`
+            console.log("Incorrecto");
+            inputRepuesta.focus();
         }
     }
 
@@ -65,13 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startUpdatingWords() {
-        if (intervalId !== null) return;
+        let intervalId;
+        //if (intervalId !== null) return;
 
         setTimeout(() => {
             clearInterval(intervalId);
             intervalId = null;
         }, 1000);
-
         intervalId = setInterval(() => {
             randomWords();
         }, 100);
@@ -99,14 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadNewWords(word) {
         let localWords = loadWords();
-
         return localWords;
     }
 
 
     let listWords = loadWords();
     console.log("Palabras iniciales: " + listWords);
-
     console.log("Palabras finales: " + listWords);
     randomWords()
     startUpdatingWords()
@@ -128,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(countdownInterval);
         }
         regresiva = 3;
-        countdownInterval = setInterval(cuentaRegresiva, 1000);
+        countdownInterval = setInterval(cuentaRegresiva, 600);
     }
 
 
@@ -143,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     buttonOtraPalabra.addEventListener('click', function (event) {
-        randomWords();
         startUpdatingWords();
+        randomWords();
     });
     buttonEnviar.addEventListener('click', verificarRespuesta);
 })
