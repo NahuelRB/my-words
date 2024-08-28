@@ -35,8 +35,10 @@ function loadWords() {
     console.log("Cargando palabras");   
 
     if (inputWordSpanish.value.trim() != "" && inputWordEnglish.value.trim() != "") {
-        listSpanishLocal.push(inputWordSpanish.value.trim());
-        listEnglishLocal.push(inputWordEnglish.value.trim());
+        listSpanishLocal.push(inputWordSpanish.value.trim().toLowerCase());
+        listEnglishLocal.push(inputWordEnglish.value.trim().toLowerCase());
+        console.log(listEnglishLocal);
+        console.log(listSpanishLocal);
         saveWordsSpanish(listSpanishLocal);
         saveWordsEnglish(listEnglishLocal);
         inputWordSpanish.value = ""
