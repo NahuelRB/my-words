@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {    
+
+    
     //VARIABLES
     let englishWords;
     let spanishWords;   
     let numberRandom;
     let regresiva = 3;
     let countdownInterval;
-
+    let contadorAciertos = 0;
+    
     //INPUT
     let inputRepuesta = document.querySelector(".palabra");
     inputRepuesta.focus();
@@ -17,36 +20,63 @@ document.addEventListener('DOMContentLoaded', () => {
     let resultado = document.querySelector(".resultado");
     let spanish = document.querySelector(".español");
     let english = document.querySelector(".ingles")
-
+    
     //BUTTONS
     let buttonEnviar = document.querySelector(".enviar");
     let buttonPagList = document.querySelector('.pagListaPalabras');
     let buttonOtraPalabra = document.querySelector('.otraPalabra')
-
+    
+    //FUNCIONES INICIALES
     
     function verificarRespuesta() {
+        let contadorWords=[];
+        let prueba = JSON.parse(localStorage.getItem('list_words_spanish'));
+
+        if (!localStorage.getItem('list_counter')) {
+        setCounter(Array(prueba.length).fill(0)); // Inicializa con ceros
+        }
+        
+        console.log("Probando contador");
+        console.log("Largo de la lista de palabras: " + prueba.length);
+        console.log(prueba);
+
+        
         spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
         english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
-        console.log("Prueba 1:" + inputRepuesta.value.toLowerCase());
+        
         console.log("Verificar respuesta");
-
+        
+        let contadores = getCounter();
+        
+        console.log("PROBANDO");
+        console.log("Contadores: " + contadores[2]);
+        
+        
         if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
             resultado.innerHTML = `<h3> Correcto </h3>`
             startUpdatingWords();
             randomWords();
             inputRepuesta.value = ""
             console.log("Correcto");
+            if (contadores[numberRandom] < 5){
+                contadores[numberRandom] = (contadores[numberRandom] || 0) + 1
+            }else{
+                console.log("Desea eliminar la plabra?")
+            }
+
+            setCounter(contadores);
         } else {
             iniciarCuentaRegresiva()
             inputRepuesta.value = ""
             resultado.innerHTML = `<h3> Incorrecto </h3>`
             console.log("Incorrecto");
             inputRepuesta.focus();
+            setCounter();
         }
     }
 
     function randomWords() {
-        spanishWords = loadNewWords()
+        spanishWords = loadWords()
         numberRandom = Math.floor(Math.random() * spanishWords.length);
         word.textContent = spanishWords[numberRandom];
     }
@@ -64,15 +94,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     }
 
-    function saveWords(words) {
-        let jsonWords = JSON.stringify(words);
-        localStorage.setItem("local_words", jsonWords);
+    function setCounter(listCounter){
+        console.log("Lista");
+        console.log(listCounter);
+        localStorage.setItem('list_counter', JSON.stringify(listCounter));
+        return listCounter;
+    }
+
+    function getCounter() {
+        let  listCounter = JSON.parse(localStorage.getItem('list_counter'));
+        return listCounter;
     }
 
     function loadWords() {
         try {
             spanishWords = JSON.parse(localStorage.getItem('list_words_spanish'));
             englishWords = JSON.parse(localStorage.getItem('list_words_english'));
+            //contadorWords = JSON.parse(localStorage.getItem('list_counter'))
             if (spanishWords) {
                 return spanishWords;
             } else {
@@ -84,10 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function loadNewWords(word) {
+    /*function loadNewWords() {
         let localWords = loadWords();
         return localWords;
-    }
+    }*/
 
 
     let listWords = loadWords();
