@@ -1,77 +1,73 @@
-document.addEventListener('DOMContentLoaded', () => {    
+document.addEventListener('DOMContentLoaded', () => {
 
-    
+
     //VARIABLES
     let englishWords;
-    let spanishWords;   
+    let spanishWords;
     let numberRandom;
     let regresiva = 3;
     let countdownInterval;
     let contadorAciertos = 0;
-    
+    let listaContador = [];
+
     //INPUT
     let inputRepuesta = document.querySelector(".palabra");
     inputRepuesta.focus();
     //LABEL
     let labelRegresiva = document.querySelector(".regresiva")
-    
+
     //DIV
     let word = document.querySelector(".word");
     let resultado = document.querySelector(".resultado");
     let spanish = document.querySelector(".español");
     let english = document.querySelector(".ingles")
-    
+
     //BUTTONS
     let buttonEnviar = document.querySelector(".enviar");
     let buttonPagList = document.querySelector('.pagListaPalabras');
     let buttonOtraPalabra = document.querySelector('.otraPalabra')
-    
+
     //FUNCIONES INICIALES
-    
+
     function verificarRespuesta() {
-        let contadorWords=[];
-        let prueba = JSON.parse(localStorage.getItem('list_words_spanish'));
+        let contadorWords = [];
+        //let prueba = JSON.parse(localStorage.getItem('list_words_spanish'));
 
-        if (!localStorage.getItem('list_counter')) {
-        setCounter(Array(prueba.length).fill(0)); // Inicializa con ceros
-        }
-        
-        console.log("Probando contador");
-        console.log("Largo de la lista de palabras: " + prueba.length);
-        console.log(prueba);
 
-        
+        //randomWords();
+        startUpdatingWords();
+        console.log("f" + numberRandom)
         spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
         english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
-        
+
         console.log("Verificar respuesta");
-        
+
         let contadores = getCounter();
-        
-        console.log("PROBANDO");
-        console.log("Contadores: " + contadores[2]);
-        
-        
+
         if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
             resultado.innerHTML = `<h3> Correcto </h3>`
-            startUpdatingWords();
-            randomWords();
             inputRepuesta.value = ""
             console.log("Correcto");
-            if (contadores[numberRandom] < 5){
+            console.log("Contadores: " + contadores)
+            console.log("Palabra: " + englishWords[numberRandom]);
+            console.log("Ubicacion de la palabra: " + numberRandom);
+            if (contadores[numberRandom] < 5) {
                 contadores[numberRandom] = (contadores[numberRandom] || 0) + 1
-            }else{
+                console.log("El contador es: " + contadores[numberRandom]);
+            } else {
                 console.log("Desea eliminar la plabra?")
             }
-
             setCounter(contadores);
         } else {
-            iniciarCuentaRegresiva()
+            //iniciarCuentaRegresiva()
             inputRepuesta.value = ""
             resultado.innerHTML = `<h3> Incorrecto </h3>`
             console.log("Incorrecto");
-            inputRepuesta.focus();
-            setCounter();
+            inputRepuesta.focus(); 
+            console.log("El contador entero: " + contadores);
+            contadores[numberRandom] = 0;
+            console.log("Se pasa a 0 el contador de la palabra: " + contadores);
+            setCounter(contadores);
         }
     }
 
@@ -79,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         spanishWords = loadWords()
         numberRandom = Math.floor(Math.random() * spanishWords.length);
         word.textContent = spanishWords[numberRandom];
+        console.log("r" + numberRandom)
     }
 
     function startUpdatingWords() {
@@ -94,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     }
 
-    function setCounter(listCounter){
+    function setCounter(listCounter) {
         console.log("Lista");
         console.log(listCounter);
         localStorage.setItem('list_counter', JSON.stringify(listCounter));
@@ -102,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getCounter() {
-        let  listCounter = JSON.parse(localStorage.getItem('list_counter'));
+        let listCounter = JSON.parse(localStorage.getItem('list_counter'));
         return listCounter;
     }
 
@@ -110,8 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             spanishWords = JSON.parse(localStorage.getItem('list_words_spanish'));
             englishWords = JSON.parse(localStorage.getItem('list_words_english'));
-            //contadorWords = JSON.parse(localStorage.getItem('list_counter'))
+      
             if (spanishWords) {
+                if (!localStorage.getItem('list_counter')) {
+                    setCounter(Array(spanishWords.length).fill(0)); // Inicializa con ceros
+                }
                 return spanishWords;
             } else {
                 return [];
@@ -121,12 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return [];
         }
     }
-
-    /*function loadNewWords() {
-        let localWords = loadWords();
-        return localWords;
-    }*/
-
 
     let listWords = loadWords();
     console.log("Palabras iniciales: " + listWords);
