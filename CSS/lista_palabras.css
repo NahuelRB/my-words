@@ -4,9 +4,21 @@
     box-sizing: border-box;
 }
 
-header h1{
+header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 4rem; 
+}
+header h1 {
+    flex: 1; 
+    text-align: center; 
     margin: 1.5rem;
 }
+header a img{
+        width: 4rem;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -20,13 +32,17 @@ header h1{
     justify-content: space-evenly;
 }
 
-
 .container {
     align-items: center;
 }
 
 .prueba {
     margin: 3px;
+}
+
+.container input{
+    margin: 0.4rem;
+    width: 18rem;
 }
 
 .container ul li label {

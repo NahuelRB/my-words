@@ -1,148 +1,193 @@
-
-let spanishWords = ["gato", "perro", "caballo", "gallina", "tigre", "leon"]
-let englishWords = ["cat", "dog", "horse", "hen", "tiger", "lion"]
-
-let intervalId;
-let numberRandom;
 document.addEventListener('DOMContentLoaded', () => {
-    //Input
-    let palabra = document.getElementById("palabra");
-    
+    //VARIABLES
+    let englishWords;
+    let spanishWords;
+    let numberRandom;
+    let regresiva = 3;
+    let countdownInterval;
+    let contadorAciertos = 0;
+    let listaContador = [];
+
+    //INPUT
+    let inputRepuesta = document.querySelector(".palabra");
+    inputRepuesta.focus();
+
+    //LABEL
+    let labelRegresiva = document.querySelector(".regresiva")
+
     //DIV
-    let word = document.getElementById("word");
-    let resultado = document.getElementById("resultado");
-    let spanish = document.getElementById("español");
-    let english = document.getElementById("ingles")
+    let divWord = document.querySelector(".word");
+    let divResultado = document.querySelector(".resultado");
+    let divSpanish = document.querySelector(".español");
+    let divEnglish = document.querySelector(".ingles")
+
+    //BUTTONS
+    let buttonEnviar = document.querySelector(".enviar");
+    let buttonPagList = document.querySelector('.pagListaPalabras');
+    let buttonOtraPalabra = document.querySelector('.otraPalabra')
+
+    //FUNCIONES INICIALES
+    function verificarRespuesta() {
+        let contadorWords = [];
     
-    //Buttons
-    let enter = document.getElementById("enviar");
-    let pagList = document.querySelector('.pagListaPalabras');
-    
-    let prueba2 = document.getElementById("prueba");
+        //randomWords();
+        startUpdatingWords();
+        //console.log("f" + numberRandom)
+        divSpanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
+        divEnglish.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
 
-    //Eventos
-    pagList.addEventListener('click', function(event){
-        window.location.href = '/MY-WORDS/HTML/lista_palabras.html'
-    });
+        console.log("********************************");
+        console.log("Verificar respuesta");
 
-    palabra.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Evita el comportamiento por defecto de la tecla Enter
-            enter.click(); // Simula un clic en el botón
-        }
-    });
-    enter.addEventListener('click', prueba);
-    prueba2.addEventListener('click', listado);
+        let contadores = getCounter();
 
-    let listadoPrueba = []
-    contador = 0
-    function listado(){
-        let listadoPrueba2= "Prueba" + (contador ++)
-
-        listadoPrueba.push(listadoPrueba2);
-
-        console.log(listadoPrueba);
-    }
-
-    function prueba() {
-        //console.log(palabra.value);
-
-        spanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
-        english.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
-        console.log("Prueba 1:" + palabra.value.toLowerCase());
-
-        // let palabraMinuscula = palabra.value.toLowerCase();
-
-
-        if (englishWords[numberRandom] == palabra.value.toLowerCase()) {
-            console.log("Funciono la traducción");
-            resultado.innerHTML = `<h3> Es correcto </h3>`
-            //clearInterval(intervalId); // Limpia el intervalo existente
-            intervalId = null; 
-            startUpdatingWords();
-            randomWords();
-            palabra.value=""
+        if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
+            divResultado.innerHTML = `<h3> Correcto </h3>`
+            inputRepuesta.value = ""
+            console.log("********   Correcto    ***************");
+            console.log("Correcto");
+            console.log("Contadores: " + contadores)
+            console.log("Palabra: " + englishWords[numberRandom]);
+            console.log("Ubicacion de la palabra: " + numberRandom);
+            if (contadores[numberRandom] < 2 || contadores[numberRandom] == null) {
+                contadores[numberRandom] = (contadores[numberRandom] || 0) + 1
+                console.log("El contador es: " + contadores[numberRandom]);
+                setCounter(contadores);
+            } else {
+                console.log("Desea eliminar la plabra?")
+                console.log(contadores);
+                let confirmacion = confirm('¿Estás seguro de que deseas continuar?');
+                if(confirmacion){
+                    console.log(spanishWords);
+                    spanishWords.splice(numberRandom,1);
+                    englishWords.splice(numberRandom,1);
+                    contadores.splice(numberRandom,1)
+                    setWordsSpanish(spanishWords);
+                    setWordsEnglish(englishWords);
+                    setCounter(contadores);
+                    console.log(spanishWords);
+                }
+            }
         } else {
-            console.log("Fallaste");
-            palabra.value=""
-            resultado.innerHTML = `<h3> Fallaste </h3>`
+            //iniciarCuentaRegresiva()
+            inputRepuesta.value = ""
+            divResultado.innerHTML = `<h3> Incorrecto </h3>`
+            console.log("************   Incorrecto   ********************");
+            inputRepuesta.focus(); 
+            console.log("El contador entero: " + contadores);
+            contadores[numberRandom] = 0;
+            console.log("Se pasa a 0 el contador de la palabra: " + contadores);
+            setCounter(contadores);
         }
     }
+
+//Actualizar lista de palabras en español
+function setWordsSpanish(word) {
+    console.log("******   Guardando palabras en español en el LocalStorage   *********");
+    console.log("Guardando palabras en español en el LocalStorage");
+    console.log("Palabra: " + word.value);
+    localStorage.setItem('list_words_spanish', JSON.stringify(word));
+}
+//Actualizar lista de palabras en ingles
+function setWordsEnglish(word) {
+    console.log("**********   Guardando palabras en ingles en el LocalStorage   *************");
+    console.log("Guardando palabras en ingles en el LocalStorage");
+    console.log("Palabra: " + word.value);
+    localStorage.setItem('list_words_english', JSON.stringify(word));
+}
+//Actualizar lista de contadores
+function setCounter(listCounter) {
+    console.log("***************   Lista   ********************");
+    console.log(listCounter);
+    localStorage.setItem('list_counter', JSON.stringify(listCounter));
+    return listCounter;
+}
 
     function randomWords() {
-        //words = loadNewWords()    
+        spanishWords = loadWords()
         numberRandom = Math.floor(Math.random() * spanishWords.length);
-        word.textContent = spanishWords[numberRandom];
-    }
-
-    function verifyWord() {
-        //localStorage.removeItem("local_words");
-
-        /*if (palabra == "tren") {
-            console.log("funciono");
-            resultado += "<h3> Ganaste</h3>"
-            } else {
-                resultado += "<h3> Perdiste </h3>"
-        }
-        document.body.insertAdjacentHTML('beforeend', resultado)*/
-
-        /*words = loadNewWords(palabra);
-        let p = randomWords(words);
-        console.log("Prueba: " + p);
-        
-        let s = `<p>${p}</p>`;
-        word.innerHTML = s*/
+        divWord.textContent = spanishWords[numberRandom];
     }
 
     function startUpdatingWords() {
-        if (intervalId) return;
+        let intervalId;
+        //if (intervalId !== null) return;
+
         setTimeout(() => {
             clearInterval(intervalId);
+            intervalId = null;
         }, 1000);
-
         intervalId = setInterval(() => {
             randomWords();
         }, 100);
     }
 
-    function saveWords(words) {
-        let jsonWords = JSON.stringify(words);
-        localStorage.setItem("local_words", jsonWords);
+
+    function getCounter() {
+        let listCounter = JSON.parse(localStorage.getItem('list_counter'));
+        return listCounter;
     }
 
     function loadWords() {
-        let localWords = localStorage.getItem("local_words")
         try {
-            if (localWords)
-                return JSON.parse(localWords);
-            else
+            spanishWords = JSON.parse(localStorage.getItem('list_words_spanish'));
+            englishWords = JSON.parse(localStorage.getItem('list_words_english'));
+      
+            if (spanishWords) {
+                if (!localStorage.getItem('list_counter')) {
+                    setCounter(Array(spanishWords.length).fill(0));
+                }
+                return spanishWords;
+            } else {
                 return [];
+            }
         } catch (error) {
             console.error("Error al parsear el JSON: " + error);
             return [];
         }
     }
 
-    function loadNewWords(word) {
-        let localWords = loadWords();
-
-        /*if (!Array.isArray(localWords)) {
-            localWords = [];
-            }*/
-
-        localWords.push(word);
-        saveWords(localWords);
-        return localWords;
-    }
-
     let listWords = loadWords();
     console.log("Palabras iniciales: " + listWords);
-
-    //listWords = loadNewWord       s("Dato1");
-    //listWords = loadNewWords("Dato2");
-
     console.log("Palabras finales: " + listWords);
     randomWords()
     startUpdatingWords()
 
+    function cuentaRegresiva() {
+        if (regresiva <= 0) {
+            clearInterval(countdownInterval);
+            location.reload();
+        } else {
+            console.log("entro");
+            labelRegresiva.hidden = false;
+            labelRegresiva.textContent = regresiva;
+            regresiva--;
+        }
+    }
+
+    function iniciarCuentaRegresiva() {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        regresiva = 3;
+        countdownInterval = setInterval(cuentaRegresiva, 600);
+    }
+
+
+    //EVENTOS
+    buttonPagList.addEventListener('click', function (event) {
+        window.location.href = 'lista_palabras.html'
+    });
+    inputRepuesta.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            buttonEnviar.click();
+        }
+    });
+    buttonOtraPalabra.addEventListener('click', function (event) {
+        startUpdatingWords();
+        randomWords();
+    });
+    buttonEnviar.addEventListener('click', verificarRespuesta);
 })
+

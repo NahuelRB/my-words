@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header h2{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem;
+}
+
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.container .word{
+    background: rgb(17, 16, 16);
+    color: white;
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-evenly;
+    width: 16rem;
+}
+
+.container .palabra{
+    background-color: rgb(194, 211, 227);
+    border-radius: 3px;
+    font-size: 1.2rem;
+    padding: 0.3rem;
+    text-align: center; 
+    width: 22rem;
+}
+
+.container button{
+    margin: 1rem;
+}
