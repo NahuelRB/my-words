@@ -17,42 +17,43 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(localWordsEnglish)
 
         let ul = document.createElement('ul');
-        //ul.style.listStyleType = 'none';
 
         localWordsSpanish.forEach((word, index) => {
             let li = document.createElement('li');
             li.className = 'lista'
 
-            let span = document.createElement('span')
-            let span2 = document.createElement('span')
-
-            span.className = 'span'
-            span2.className = 'span2'
-
-            let label = document.createElement('label')
-            let botonX = document.createElement('button')
-
-            label.textContent = word
-            botonX.textContent = "X";
-            botonX.id = `btn-${index}`
-            botonX.className = 'btn btn-danger btn-sm prueba';
-
-            botonX.addEventListener('click', function () {
-                localWordsSpanish.splice(index, 1);
-                localStorage.setItem('list_words_spanish', JSON.stringify(localWordsSpanish));
-                localWordsEnglish.splice(index, 1);
-                localStorage.setItem('list_words_english', JSON.stringify(localWordsEnglish));
-                showList()
-            });
-
-            span.appendChild(label);
+            let span1 = createElement('span','span1')
+            let span2 = createElement('span','span2')
+            let botonX = createElement('button','btn btn-danger btn-sm prueba','X')
+            
+            let label = createElement('label','', word)
+        
+            botonX.addEventListener('click',()=> deleteList(index,localWordsSpanish,localWordsEnglish));
+            
+            span1.appendChild(label);
             span2.appendChild(botonX);
-            li.appendChild(span)
+            li.appendChild(span1)
             li.appendChild(span2)
             ul.appendChild(li);
         });
         listado.appendChild(ul);
     }
+
+    function createElement(tagname, className, textContent){
+        let element = document.createElement(tagname);
+        element.className = className;
+        element.textContent = textContent;
+        return element;
+    }
+
+    function deleteList(index,localWordsSpanish,localWordsEnglish){
+        localWordsSpanish.splice(index, 1);
+        localStorage.setItem('list_words_spanish', JSON.stringify(localWordsSpanish));
+        localWordsEnglish.splice(index, 1);
+        localStorage.setItem('list_words_english', JSON.stringify(localWordsEnglish));
+        showList()
+    };
+
     //Guardar la lista en LocalStorage
     function saveWordsSpanish(word) {
         console.log("Guardando palabras en español en el LocalStorage");
@@ -64,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Palabra: " + word.value);
         localStorage.setItem('list_words_english', JSON.stringify(word));
     }
-
+    
     //Cargando palabras a la lista
     function loadWords() {
         let listSpanishLocal = JSON.parse(localStorage.getItem('list_words_spanish')) || []
         let listEnglishLocal = JSON.parse(localStorage.getItem('list_words_english')) || []
-
+        
         console.log("Cargando palabras");
-
+        
         if (inputWordSpanish.value.trim() != "" && inputWordEnglish.value.trim() != "") {
             listSpanishLocal.push(inputWordSpanish.value.trim().toLowerCase());
             listEnglishLocal.push(inputWordEnglish.value.trim().toLowerCase());
@@ -88,11 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         showList()
     }
-
-
+    
+    
     //EVENTOS
     buttonCargar.addEventListener('click', loadWords);
-
+    
     document.addEventListener('keydown', function (event) {
         if (event.ctrlKey && event.key === 'ArrowLeft') {
             window.history.back();
@@ -102,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
     buttonHome.addEventListener('click', function (event) {
         window.history.back();
     });
-
+    
+    
     inputWordSpanish.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             event.preventDefault();
