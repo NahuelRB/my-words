@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //DIV
     let divWord = document.querySelector(".word");
     let divResultado = document.querySelector(".resultado");
-    let divSpanish = document.querySelector(".español");
+    //let divSpanish = document.querySelector(".español");
     let divEnglish = document.querySelector(".ingles")
 
     //BUTTONS
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         //randomWords();
         startUpdatingWords();
         //console.log("f" + numberRandom)
-        divSpanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
-        divEnglish.textContent = `Palabra en inglés: ${englishWords[numberRandom]}`
+        //divSpanish.textContent = `Palabra en español: ${spanishWords[numberRandom]}`
+        divEnglish.textContent = `${englishWords[numberRandom]}`
 
         console.log("********************************");
         console.log("Verificar respuesta");
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let contadores = getCounter();
 
         if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
-            divResultado.innerHTML = `<h3> Correcto </h3>`
+            divResultado.innerHTML = `<h3 class="resultado"> Correcto </h3>`
         
             inputRepuesta.value = ""
             console.log("********   Correcto    ***************");
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             //iniciarCuentaRegresiva()
             inputRepuesta.value = ""
-            divResultado.innerHTML = `<h3> Incorrecto </h3>`
+            divResultado.innerHTML = `<h3 class="resultado"> Incorrecto </h3>`
             console.log("************   Incorrecto   ********************");
             inputRepuesta.focus(); 
             console.log("El contador entero: " + contadores);
