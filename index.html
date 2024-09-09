@@ -11,13 +11,15 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <h2>Welcome to the app "My words"</h2>
-        </div>
+    <header class="bg-light py-3">  
+            <h1>Welcome to the app "My words"</h1>   
     </header>
 
-    <div class="container">
+    <main class="container my-4">
+        <h3 class="resultado mb-4">
+            <br>
+        </h3>
+
         <div class="word">
         </div>
         <br>
@@ -29,16 +31,13 @@
             <button class="enviar btn btn-primary">Enviar</button>
             <button class="otraPalabra btn btn-success">Pasa palabra</button>
         </div>
-        <div class="resultado">
-            
-        </div>
         <button class="pagListaPalabras btn btn-primary">Lista de palabras</button>
         <div>
             <p class="español"></p>
             <p class="ingles"></p>
         </div>
-        <div class="regresiva" hidden>3</div>
-    </div>
+        <div class="regresiva">3</div>
+    </main>
 
 </body>
 <script src="JAVASCRIPT/Words.js"></script>

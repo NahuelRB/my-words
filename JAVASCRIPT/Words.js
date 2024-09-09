@@ -43,13 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (englishWords[numberRandom] == inputRepuesta.value.toLowerCase()) {
             divResultado.innerHTML = `<h3> Correcto </h3>`
+        
             inputRepuesta.value = ""
             console.log("********   Correcto    ***************");
             console.log("Correcto");
             console.log("Contadores: " + contadores)
             console.log("Palabra: " + englishWords[numberRandom]);
             console.log("Ubicacion de la palabra: " + numberRandom);
-            if (contadores[numberRandom] < 2 || contadores[numberRandom] == null) {
+            if (contadores[numberRandom] < 4 || contadores[numberRandom] == null) {
                 contadores[numberRandom] = (contadores[numberRandom] || 0) + 1
                 console.log("El contador es: " + contadores[numberRandom]);
                 setCounter(contadores);

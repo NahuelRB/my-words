@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let buttonCargar = document.querySelector(".cargar");
     let buttonHome = document.querySelector(".home");
 
-    //Mostrando lista armada
+    //MOSTRANDO LISTA ARMADA
     function showList() {
         let localWordsSpanish = JSON.parse(localStorage.getItem('list_words_spanish')) || []
         let localWordsEnglish = JSON.parse(localStorage.getItem('list_words_english')) || []
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         listado.appendChild(ul);
     }
 
+    //CREAMOS LOS ELEMENTOS DEL DOM DE FORMA GENERICA
     function createElement(tagname, className, textContent){
         let element = document.createElement(tagname);
         element.className = className;
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return element;
     }
 
+    //ELIMINAMOS EL CONTENIDO DE LAS LISTAS SEGÚN EL INDEX
     function deleteList(index,localWordsSpanish,localWordsEnglish){
         localWordsSpanish.splice(index, 1);
         localStorage.setItem('list_words_spanish', JSON.stringify(localWordsSpanish));
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showList()
     };
 
-    //Guardar la lista en LocalStorage
+    //GUARDAR LA LISTA EN EL LOCALSTORAGE
     function saveWordsSpanish(word) {
         console.log("Guardando palabras en español en el LocalStorage");
         console.log("Palabra: " + word.value);
@@ -66,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('list_words_english', JSON.stringify(word));
     }
     
-    //Cargando palabras a la lista
+    //CARGANDO PALABRAS A LA LISTA
     function loadWords() {
         let listSpanishLocal = JSON.parse(localStorage.getItem('list_words_spanish')) || []
         let listEnglishLocal = JSON.parse(localStorage.getItem('list_words_english')) || []
