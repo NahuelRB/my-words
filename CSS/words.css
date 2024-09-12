@@ -4,8 +4,8 @@
     padding: 0;
 }
 
-body{
-    background: url('../IMAGENES/IRLANDA-696x391.jpg') no-repeat center center;
+:root {
+    --border-radius: 10px;
 }
 
 header h1 {
@@ -15,7 +15,7 @@ header h1 {
     font-family: 'Arial', sans-serif;
     font-size: 2.5rem;
     font-weight: bold;
-    margin: 1.5rem;
+    margin: 1rem;
     padding: 10px;
     text-align: center;
     text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.3);
@@ -31,51 +31,60 @@ header h1 {
     background-color: #f4f4f4;
     /*background-color: #f4f4f4;*/
     padding: 0.4rem;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
-.container h3 .resultado {
+.container .resultado {
     color: #FF6F00;
     background-color: #f4f4f4;
-    width: 8rem;
+    border-radius: 10px;
     text-align: center;
     font-size: 1.5rem;
     margin: 0.3rem;
     padding: 0.4rem;
     border: 2px solid #FF6F00;
-    border-radius: 10px;
 }
 
 .container .word {
     background-size: cover;
     background: #F9F9F9;
     border: 2px solid #009B77;
-    border-radius: 10px;
-    padding: 0.3rem;
+    border-radius: var(--border-radius);
     text-align: center;
     font-size: 2rem;
-    margin: 15px 0;
     width: 16rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
 }
 
 .container .palabra {
     background-color: rgb(194, 211, 227);
     border: 2px solid #009B77;
-    border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding: 0.3rem;
     text-align: center;
-    width: 22rem;
+    width: 30rem;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    margin: -1rem;
 }
 
-.container button {
-    margin: 1rem;
-    border-radius: 10px;
+.container .buttonAction{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: -0.7rem;
+    width: 15rem;
+}
+
+.container button{
+    margin: 0.5rem;
     font-weight: bold;
     color: #FFFFFF;
     background-color: rgba(22, 155, 98, 255);
     border: none;
+    font-size: 1.2rem;
+    border-radius: var(--border-radius);
 }
 
 .container button:hover {
@@ -87,6 +96,7 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: var(--border-radius);
 }
 
 .container .regresiva {
@@ -96,9 +106,9 @@ header h1 {
     width: 3rem;
     text-align: center;
     border: 2px solid #FF6F00;
-    border-radius: 10px;
     margin: 0.4rem 0 1rem 0;
     font-weight: bold;
+    border-radius: var(--border-radius);
 }
 
 .container .ayuda p {
@@ -108,6 +118,6 @@ header h1 {
     text-align: center;
     font-size: 1.5rem;
     border: 2px solid #FF6F00;
-    border-radius: 10px;
     font-weight: bold;
+    border-radius: var(--border-radius);
 }
