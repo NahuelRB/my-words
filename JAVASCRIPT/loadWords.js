@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    //VARIABLES
+    let currentPage = 0;
+    const wordsPerPage = 6;
+
     //ELEMENTOS DEL DOM
     let listado = document.querySelector(".list_of_words");
     let inputWordSpanish = document.querySelector(".wordSpanish");
@@ -18,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let ul = document.createElement('ul');
 
-        localWordsSpanish.forEach((word, index) => {
+        let start = currentPage * wordsPerPage;
+        let end = start + wordsPerPage;
+        let paginateWords = localWordsSpanish.slice(start,end);
+
+        paginateWords.forEach((word, index) => {
             let li = document.createElement('li');
             li.className = 'lista'
 
