@@ -3,25 +3,59 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root {
+    --border-radius: 10px;
+}
 
-header{
+body {
+    background-color: #C0C0C0;
+}
+
+
+
+header {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 0 4rem; 
+    padding: 0 4rem;
+    position: relative;
 }
 header h1 {
-    flex: 1; 
-    text-align: center; 
-    margin: 1.5rem;
+    align-items: center;
+    border-radius: 8px;
+    background: linear-gradient(to right, #dc3545, #212529);
+    color: transparent;
+    flex: 1;
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1rem;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgb(0, 0, 0, 0.3);
+    -webkit-background-clip: text; 
 }
-header a img{
-        width: 4rem;
+header a img {
+    left: 4rem;
+    margin-top: 1.5rem;
+    position: absolute;
+    width: 5rem;
 }
 
 .container {
     display: flex;
     flex-direction: column;
+}
+.container .cargar{
+    margin: 2rem 2rem 2rem 2rem;
+    padding: 2rem 2rem 2rem 2rem;
+    color: blue;
+    background-color: rgb(173, 51, 51);
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+}
+.container .cargar:hover{
+    background-color: yellow;
 }
 
 .lista {
@@ -40,7 +74,7 @@ header a img{
     margin: 3px;
 }
 
-.container input{
+.container input {
     margin: 0.4rem;
     width: 18rem;
 }
@@ -66,7 +100,7 @@ header a img{
     display: flex;
 }
 
-.container input { 
+.container input {
     background-color: black;
     border: darkgoldenrod;
     border-radius: 8px;
@@ -74,7 +108,8 @@ header a img{
     font-size: 1rem;
     padding: 10px 20px;
 }
-.container .cargar{
+
+.container .cargar {
     width: 7rem;
     margin: 1rem;
 }

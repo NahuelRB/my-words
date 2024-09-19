@@ -9,6 +9,7 @@
 }
 
 header h1 {
+    flex: 1;
     border-radius: 8px;
     background: linear-gradient(to right, rgba(22, 155, 98, 255), rgba(255, 136, 62, 255));
     color: transparent;
