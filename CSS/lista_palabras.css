@@ -128,3 +128,15 @@ header a img {
     width: 7rem;
     margin: 1rem;
 }
+
+@media(min-width: 481px) and (max-width: 720px){
+    body{
+        background-color: yellow;
+    }
+}
+
+@media (min-width: 1080px) and (max-width: 2340px) {
+    body {
+        background-color: lightblue;
+    }
+}
