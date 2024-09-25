@@ -44,6 +44,10 @@ header a img {
     display: flex;
     flex-direction: column;
 }
+.container .paginacion{
+  display: flex;
+  align-items: center;
+}
 .container .paginacion button{
     margin: 1rem 1rem 1rem 1rem;
     padding: 1rem 1rem 1rem 1rem;
@@ -129,14 +133,37 @@ header a img {
     margin: 1rem;
 }
 
-@media(min-width: 481px) and (max-width: 720px){
-    body{
-        background-color: yellow;
-    }
+.prueba{
+
 }
 
-@media (min-width: 1080px) and (max-width: 2340px) {
-    body {
-        background-color: lightblue;
+
+@media(min-width: 412px) and (max-width: 916px){
+    .container .paginacion{
+        height: 5rem;
     }
+  .container .paginacion .prev{
+    background-image: url(../IMAGENES/flecha-izquierda.png);
+    background-color: rgb(139, 130, 130);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 7rem; /* Ancho del enlace */
+    height: 5rem; /* Altura del enlace */
+    color: transparent;
+    width: 4.4rem;
+    height: 1.6rem;
+  }
+  .container .paginacion .next{
+    background-image: url(../IMAGENES/flecha-derecha.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 7rem; /* Ancho del enlace */
+    height: 5rem; /* Altura del enlace */
+    color: transparent;
+    width: 4.4rem;
+    height: 1.6rem;
+  }
+  header .home img{
+    margin-left: -3rem;
+  }
 }
