@@ -44,6 +44,21 @@ header a img {
     display: flex;
     flex-direction: column;
 }
+.container .paginacion button{
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    color: blue;
+    background-color: rgb(173, 51, 51);
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+}
+.container .paginacion span{
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    color: black;
+}
 .container .cargar{
     margin: 2rem 2rem 2rem 2rem;
     padding: 2rem 2rem 2rem 2rem;
