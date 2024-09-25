@@ -138,7 +138,7 @@ header a img {
 }
 
 
-@media(min-width: 412px) and (max-width: 916px){
+@media(min-width: 112px) and (max-width: 916px){
     .container .paginacion{
         height: 5rem;
     }
